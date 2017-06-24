@@ -1,0 +1,146 @@
+#+TITLE: My GNU Emacs configuration
+#+STARTUP: indent
+#+OPTIONS: H:5 num:nil tags:nil toc:nil timestamps:t
+#+LAYOUT: post
+#+DESCRIPTION: Loading emacs configuration using org-babel
+#+TAGS: emacs
+#+CATEGORIES: editing
+
+* はじめに
+
+この設定は、[[https://gitlab.com/buildfunthings/emacs-config][buildfunthings/emacs-config]] をベースにしています。
+
+#+BEGIN_SRC emacs-lisp
+  (setq user-full-name "Kohei Kawasaki")
+  (setq user-mail-address "mynameiskawasaq@gmail.com")
+#+END_SRC
+
+* 基本的なキーの変更
+** C-h をバックスペースにする
+#+BEGIN_SRC emacs-lisp
+(global-set-key "\C-h" 'delete-backward-char)
+#+END_SRC
+
+** Meta+方向で window を移動できるようにする
+
+ただし org-mode を除く。
+
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "M-<left>")  'windmove-left)
+  (global-set-key (kbd "M-<right>") 'windmove-right)
+  (global-set-key (kbd "M-<up>")    'windmove-up)
+  (global-set-key (kbd "M-<down>")  'windmove-down)
+#+END_SRC
+
+** Mac 固有の設定
+*** Command とスペースで入力切替が起こる設定を無効にする
+
+Emacs の設定ではなく、Mac 側の設定を変更する必要がある。
+
+1. システム設定画面からキーボードを選択する。
+2. ショートカットのタブを選択する。
+3. 「入力ソース」の設定のところに、コマンドキーとスペースキーを組み合わせたショートカットが登録されているので、これを無効にする。
+
+*** Mac OS の Command キーと Option キーの挙動を変更する
+Command キーをメタキーに、Optionキーを無効に変更する
+
+#+name: credmp-keys
+#+begin_src emacs-lisp
+  (setq mac-option-modifier 'none)
+  (setq mac-command-modifier 'meta)
+  (setq ns-function-modifier 'hyper)
+#+end_src
+
+*** yes/no の代わりに y/n で答えられるようにする
+#+BEGIN_SRC emacs-lisp
+(fset 'yes-or-no-p 'y-or-n-p)
+#+END_SRC
+
+* パッケージごとの設定
+** use-package をインストールする
+
+#+BEGIN_SRC emacs-lisp
+(require 'package)
+(setq package-enable-at-startup nil)
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+(add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
+(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
+(package-initialize)
+
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+
+(require 'diminish)
+(require 'bind-key)
+#+END_SRC
+
+** swiper
+使い方とかはここを見る。
+
+- https://github.com/abo-abo/swiper
+- https://www.youtube.com/watch?v=VvnJQpTFVDc
+
+#+BEGIN_SRC emacs-lisp
+  (use-package ivy
+    :ensure t
+    :bind
+    (("M-x" . counsel-M-x)
+     ("M-y" . counsel-yank-pop)
+     ("C-s" . swiper)
+     ("C-c C-r" . ivy-resume)
+     ("C-x C-f" . counsel-find-file)
+     ("C-c h f" . counsel-describe-function)
+     ("C-c h v" . counsel-describe-variable)
+     ("C-c i u" . counsel-unicode-char)
+     ("M-i" . counsel-imenu)
+     ("C-c g" . counsel-git)
+     ("C-c j" . counsel-git-grep)
+     ("C-c k" . counsel-ag)
+     ("C-c l" . scounsel-locate)
+     ("C-x b" . ivy-switch-buffer)
+     :map ivy-minibuffer-map
+     ("M-y" . ivy-next-line)))
+#+END_SRC
+
+** magit
+C-c m で magit-status を実行する。
+
+#+BEGIN_SRC emacs-lisp
+  (use-package magit
+      :ensure t
+      :bind
+      (("C-c m" . magit-status)))
+#+END_SRC
+
+** 細々としたモード
+#+BEGIN_SRC emacs-lisp
+(use-package yaml-mode)
+(use-package json-mode)
+(use-package terraform-mode)
+(use-package markdown-mode :ensure t)
+#+END_SRC
+
+* Look and feel
+** カラーテーマ
+base16 のテーマを設定する
+https://github.com/chriskempson/base16
+https://github.com/stepchowfun/base16-circus-scheme
+
+#+BEGIN_SRC emacs-lisp
+(use-package base16-theme
+  :ensure t
+  :config
+  (load-theme 'base16-circus t))
+#+END_SRC
+
+#+RESULTS:
+: t
+
+** 常に行番号を表示する
+
+#+BEGIN_SRC emacs-lisp
+(global-linum-mode t)
+#+END_SRC
+
