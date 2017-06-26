@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>My GNU Emacs configuration</title>
-<!-- 2017-06-24 Sat 17:55 -->
+<!-- 2017-06-26 Mon 23:32 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Kohei Kawasaki" />
@@ -140,6 +140,40 @@ for the JavaScript code in this tag.
 <body>
 <div id="content">
 <h1 class="title">My GNU Emacs configuration</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">はじめに</a></li>
+<li><a href="#sec-2">基本的なキーの変更</a>
+<ul>
+<li><a href="#sec-2-1">C-h をバックスペースにする</a></li>
+<li><a href="#sec-2-2">Meta+方向で window を移動できるようにする</a></li>
+<li><a href="#sec-2-3">Mac 固有の設定</a></li>
+</ul>
+</li>
+<li><a href="#sec-3">パッケージごとの設定</a>
+<ul>
+<li><a href="#sec-3-1">use-package をインストールする</a></li>
+<li><a href="#sec-3-2">exec-path-from-shell-initialize</a></li>
+<li><a href="#sec-3-3">ag</a></li>
+<li><a href="#sec-3-4">wgrep</a></li>
+<li><a href="#sec-3-5">swiper</a></li>
+<li><a href="#sec-3-6">magit</a></li>
+<li><a href="#sec-3-7">markdown-toc</a></li>
+<li><a href="#sec-3-8">細々としたモード</a></li>
+</ul>
+</li>
+<li><a href="#sec-4">Look and feel</a>
+<ul>
+<li><a href="#sec-4-1">カラーテーマ</a></li>
+<li><a href="#sec-4-2">常に行番号を表示する</a></li>
+<li><a href="#sec-4-3">バックアップファイルを作るディレクトリを固定する</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
 
 <div id="outline-container-sec-1" class="outline-2">
 <h2 id="sec-1">はじめに</h2>
@@ -237,6 +271,25 @@ Command キーをメタキーに、Optionキーを無効に変更する
 </div>
 </div>
 </div>
+
+<div id="outline-container-sec-2-3-4" class="outline-4">
+<h4 id="sec-2-3-4">backslash を正しく入力できるようにする</h4>
+<div class="outline-text-4" id="text-2-3-4">
+<p>
+デフォルトでは \ (バックスラッシュ)を入力すると ¥ (円マーク)が入力されてしまう。
+これを正しく入力できるようにするには、下記の手順を行う。
+</p>
+
+<ol class="org-ol">
+<li>画面右上の 「A」というアイコンをクリックする
+</li>
+<li>「環境設定」を開く
+</li>
+<li>「入力ソース」のタブの中に「 ¥ で入力する文字」という設定項目があるので、これを「\(バックスラッシュ)」に変更する
+</li>
+</ol>
+</div>
+</div>
 </div>
 </div>
 
@@ -266,10 +319,77 @@ Command キーをメタキーに、Optionキーを無効に変更する
 </div>
 </div>
 </div>
-
 <div id="outline-container-sec-3-2" class="outline-3">
-<h3 id="sec-3-2">swiper</h3>
+<h3 id="sec-3-2">exec-path-from-shell-initialize</h3>
 <div class="outline-text-3" id="text-3-2">
+<p>
+シェルの $PATH 環境変数を引き継ぐ。
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package exec-path-from-shell :ensure t)
+(exec-path-from-shell-initialize)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3-3" class="outline-3">
+<h3 id="sec-3-3">ag</h3>
+<div class="outline-text-3" id="text-3-3">
+<p>
+使い方とかはここを見る。
+</p>
+
+<p>
+事前に homebrew で <a href="https://github.com/ggreer/the_silver_searcher">ag</a> をインストールする必要がある。
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">brew install the_silver_searcher
+</pre>
+</div>
+
+<p>
+使い方とかはここを見る。
+</p>
+
+<p>
+<a href="http://agel.readthedocs.io/en/latest/index.html">http://agel.readthedocs.io/en/latest/index.html</a>
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package ag :ensure t)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3-4" class="outline-3">
+<h3 id="sec-3-4">wgrep</h3>
+<div class="outline-text-3" id="text-3-4">
+<p>
+使い方とかはここを見る。
+</p>
+
+<p>
+<a href="https://github.com/mhayashi1120/Emacs-wgrep">https://github.com/mhayashi1120/Emacs-wgrep</a>
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package wgrep :ensure t)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3-5" class="outline-3">
+<h3 id="sec-3-5">swiper</h3>
+<div class="outline-text-3" id="text-3-5">
 <p>
 使い方とかはここを見る。
 </p>
@@ -302,14 +422,45 @@ Command キーをメタキーに、Optionキーを無効に変更する
    ("C-x b" . ivy-switch-buffer)
    :map ivy-minibuffer-map
    ("M-y" . ivy-next-line)))
+
+(use-package counsel-projectile
+  :ensure t
+  :bind
+  (("C-c p f" . counsel-projectile-find-file)
+   ("C-c p d" . counsel-projectile-find-dir)
+   ("C-c p b" . counsel-projectile-switch-to-buffer)
+   ("C-c p s s" . counsel-projectile-ag)
+   ("C-c p p" . counsel-projectile-switch-project)))
 </pre>
+</div>
+</div>
+
+<div id="outline-container-sec-3-5-1" class="outline-4">
+<h4 id="sec-3-5-1">使い方のメモ</h4>
+<div class="outline-text-4" id="text-3-5-1">
+<ol class="org-ol">
+<li>"C-c p s s" でプロジェクトの中のファイルを ag でインクリメントサーチ
+</li>
+<li>"C-c C-o"(ivy-occur) で検索結果をバッファで開く
+</li>
+<li>"C-x C-q"(vy-wgrep-change-to-wgrep-mode) で、そのバッファを編集する
+</li>
+<li>"C-c C-c"(wgrep-finish-edit) で編集を終了
+</li>
+<li>"C-x s"(save-file) で変更したバッファをファイルに保存
+</li>
+</ol>
+
+<p>
+<a href="https://sam217pa.github.io/2016/09/11/nuclear-power-editing-via-ivy-and-ag/">https://sam217pa.github.io/2016/09/11/nuclear-power-editing-via-ivy-and-ag/</a>
+</p>
 </div>
 </div>
 </div>
 
-<div id="outline-container-sec-3-3" class="outline-3">
-<h3 id="sec-3-3">magit</h3>
-<div class="outline-text-3" id="text-3-3">
+<div id="outline-container-sec-3-6" class="outline-3">
+<h3 id="sec-3-6">magit</h3>
+<div class="outline-text-3" id="text-3-6">
 <p>
 C-c m で magit-status を実行する。
 </p>
@@ -325,9 +476,20 @@ C-c m で magit-status を実行する。
 </div>
 </div>
 
-<div id="outline-container-sec-3-4" class="outline-3">
-<h3 id="sec-3-4">細々としたモード</h3>
-<div class="outline-text-3" id="text-3-4">
+<div id="outline-container-sec-3-7" class="outline-3">
+<h3 id="sec-3-7">markdown-toc</h3>
+<div class="outline-text-3" id="text-3-7">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package markdown-toc :ensure t)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3-8" class="outline-3">
+<h3 id="sec-3-8">細々としたモード</h3>
+<div class="outline-text-3" id="text-3-8">
 <div class="org-src-container">
 
 <pre class="src src-emacs-lisp">(use-package yaml-mode)
@@ -347,17 +509,22 @@ C-c m で magit-status を実行する。
 <h3 id="sec-4-1">カラーテーマ</h3>
 <div class="outline-text-3" id="text-4-1">
 <p>
-base16 のテーマを設定する
-<a href="https://github.com/chriskempson/base16">https://github.com/chriskempson/base16</a>
-<a href="https://github.com/stepchowfun/base16-circus-scheme">https://github.com/stepchowfun/base16-circus-scheme</a>
+base16 のテーマを設定する。
 </p>
+
+<ul class="org-ul">
+<li><a href="https://github.com/chriskempson/base16">https://github.com/chriskempson/base16</a>
+</li>
+<li><a href="https://github.com/Defman21/base16-materia-scheme">https://github.com/Defman21/base16-materia-scheme</a>
+</li>
+</ul>
 
 <div class="org-src-container">
 
 <pre class="src src-emacs-lisp">(use-package base16-theme
   :ensure t
   :config
-  (load-theme 'base16-circus t))
+  (load-theme 'base16-materia t))
 </pre>
 </div>
 </div>
@@ -373,11 +540,26 @@ base16 のテーマを設定する
 </div>
 </div>
 </div>
+
+<div id="outline-container-sec-4-3" class="outline-3">
+<h3 id="sec-4-3">バックアップファイルを作るディレクトリを固定する</h3>
+<div class="outline-text-3" id="text-4-3">
+<p>
+すべてのファイルのバックアップファイルを .ehist ディレクトリに作る。
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq backup-directory-alist '((".*" . "~/.ehist")))
+</pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Kohei Kawasaki</p>
-<p class="date">Created: 2017-06-24 Sat 17:55</p>
+<p class="date">Created: 2017-06-26 Mon 23:32</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

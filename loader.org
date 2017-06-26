@@ -1,6 +1,6 @@
 #+TITLE: My GNU Emacs configuration
 #+STARTUP: indent
-#+OPTIONS: H:5 num:nil tags:nil toc:nil timestamps:t
+#+OPTIONS: H:5 num:nil tags:nil toc:2 timestamps:t
 #+LAYOUT: post
 #+DESCRIPTION: Loading emacs configuration using org-babel
 #+TAGS: emacs
@@ -56,6 +56,14 @@ Command キーをメタキーに、Optionキーを無効に変更する
 (fset 'yes-or-no-p 'y-or-n-p)
 #+END_SRC
 
+*** backslash を正しく入力できるようにする
+デフォルトでは \ (バックスラッシュ)を入力すると ¥ (円マーク)が入力されてしまう。
+これを正しく入力できるようにするには、下記の手順を行う。
+
+1. 画面右上の 「A」というアイコンをクリックする
+2. 「環境設定」を開く
+3. 「入力ソース」のタブの中に「 ¥ で入力する文字」という設定項目があるので、これを「\(バックスラッシュ)」に変更する
+
 * パッケージごとの設定
 ** use-package をインストールする
 
@@ -74,6 +82,40 @@ Command キーをメタキーに、Optionキーを無効に変更する
 
 (require 'diminish)
 (require 'bind-key)
+#+END_SRC
+** exec-path-from-shell-initialize
+
+シェルの $PATH 環境変数を引き継ぐ。
+
+#+BEGIN_SRC emacs-lisp
+(use-package exec-path-from-shell :ensure t)
+(exec-path-from-shell-initialize)
+#+END_SRC
+
+** ag
+使い方とかはここを見る。
+
+事前に homebrew で [[https://github.com/ggreer/the_silver_searcher][ag]] をインストールする必要がある。
+
+#+BEGIN_SRC sh
+  brew install the_silver_searcher
+#+END_SRC
+
+使い方とかはここを見る。
+
+http://agel.readthedocs.io/en/latest/index.html
+
+#+BEGIN_SRC emacs-lisp
+  (use-package ag :ensure t)
+#+END_SRC
+
+** wgrep
+使い方とかはここを見る。
+
+https://github.com/mhayashi1120/Emacs-wgrep
+
+#+BEGIN_SRC emacs-lisp
+  (use-package wgrep :ensure t)
 #+END_SRC
 
 ** swiper
@@ -102,7 +144,25 @@ Command キーをメタキーに、Optionキーを無効に変更する
      ("C-x b" . ivy-switch-buffer)
      :map ivy-minibuffer-map
      ("M-y" . ivy-next-line)))
+
+  (use-package counsel-projectile
+    :ensure t
+    :bind
+    (("C-c p f" . counsel-projectile-find-file)
+     ("C-c p d" . counsel-projectile-find-dir)
+     ("C-c p b" . counsel-projectile-switch-to-buffer)
+     ("C-c p s s" . counsel-projectile-ag)
+     ("C-c p p" . counsel-projectile-switch-project)))
 #+END_SRC
+
+*** 使い方のメモ
+1. "C-c p s s" でプロジェクトの中のファイルを ag でインクリメントサーチ
+2. "C-c C-o"(ivy-occur) で検索結果をバッファで開く
+3. "C-x C-q"(vy-wgrep-change-to-wgrep-mode) で、そのバッファを編集する
+4. "C-c C-c"(wgrep-finish-edit) で編集を終了
+5. "C-x s"(save-file) で変更したバッファをファイルに保存
+
+https://sam217pa.github.io/2016/09/11/nuclear-power-editing-via-ivy-and-ag/
 
 ** magit
 C-c m で magit-status を実行する。
@@ -112,6 +172,11 @@ C-c m で magit-status を実行する。
       :ensure t
       :bind
       (("C-c m" . magit-status)))
+#+END_SRC
+
+** markdown-toc
+#+BEGIN_SRC emacs-lisp
+(use-package markdown-toc :ensure t)
 #+END_SRC
 
 ** 細々としたモード
@@ -124,19 +189,17 @@ C-c m で magit-status を実行する。
 
 * Look and feel
 ** カラーテーマ
-base16 のテーマを設定する
-https://github.com/chriskempson/base16
-https://github.com/stepchowfun/base16-circus-scheme
+base16 のテーマを設定する。
+
+- https://github.com/chriskempson/base16
+- https://github.com/Defman21/base16-materia-scheme
 
 #+BEGIN_SRC emacs-lisp
 (use-package base16-theme
   :ensure t
   :config
-  (load-theme 'base16-circus t))
+  (load-theme 'base16-materia t))
 #+END_SRC
-
-#+RESULTS:
-: t
 
 ** 常に行番号を表示する
 
@@ -144,3 +207,9 @@ https://github.com/stepchowfun/base16-circus-scheme
 (global-linum-mode t)
 #+END_SRC
 
+** バックアップファイルを作るディレクトリを固定する
+すべてのファイルのバックアップファイルを .ehist ディレクトリに作る。
+
+#+BEGIN_SRC emacs-lisp
+  (setq backup-directory-alist '((".*" . "~/.ehist")))
+#+END_SRC
