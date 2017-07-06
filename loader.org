@@ -181,10 +181,12 @@ C-c m で magit-status を実行する。
 
 ** 細々としたモード
 #+BEGIN_SRC emacs-lisp
-(use-package yaml-mode)
-(use-package json-mode)
-(use-package terraform-mode)
+(use-package yaml-mode :ensure t)
+(use-package json-mode :ensure t)
+(use-package terraform-mode :ensure t)
 (use-package markdown-mode :ensure t)
+(use-package nginx-mode :ensure t)
+(use-package apache-mode :ensure t)
 #+END_SRC
 
 ** org-babel
