@@ -230,5 +230,13 @@ base16 のテーマを設定する。
   (setq backup-directory-alist '((".*" . "~/.ehist")))
 #+END_SRC
 
+** セッションを保存する
+
+再起動しても、以前と同じ window や buffer が再現できるようにする。
+
+#+BEGIN_SRC emacs-lisp
+  (desktop-save-mode 1)
+#+END_SRC
+
 * Links
 - [[http://orgmode.org/worg/org-contrib/babel/languages/ob-doc-python.html][Python Source Code Blocks in Org Mode]]
