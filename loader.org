@@ -190,12 +190,17 @@ C-c m で magit-status を実行する。
 #+END_SRC
 
 ** org-babel
+*** org-babel で有効にする言語
 #+BEGIN_SRC emacs-lisp
     (org-babel-do-load-languages
      'org-babel-load-languages
      '((python . t)
        (sh . t)
        (ruby . t)))
+#+END_SRC
+** org ファイルを ipynb にエクスポートする
+#+BEGIN_SRC emacs-lisp
+  (use-package ox-ipynb :ensure t)
 #+END_SRC
 
 * Look and feel
