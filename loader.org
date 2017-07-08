@@ -179,14 +179,38 @@ C-c m で magit-status を実行する。
 (use-package markdown-toc :ensure t)
 #+END_SRC
 
-** 細々としたモード
+** 細々とした言語別のモード設定
+
+設定ファイルを記述するために。
+
 #+BEGIN_SRC emacs-lisp
-(use-package yaml-mode :ensure t)
-(use-package json-mode :ensure t)
-(use-package terraform-mode :ensure t)
-(use-package markdown-mode :ensure t)
-(use-package nginx-mode :ensure t)
-(use-package apache-mode :ensure t)
+  (use-package yaml-mode :ensure t)
+  (use-package json-mode :ensure t)
+#+END_SRC
+
+Terraform の設定を書く時は、基本的には IntelliJ を使った方が良い。けど、一応入れておく。
+
+#+BEGIN_SRC emacs-lisp
+  (use-package terraform-mode :ensure t)
+#+END_SRC
+
+README.md を編集するために。
+
+#+BEGIN_SRC emacs-lisp
+  (use-package markdown-mode :ensure t)
+#+END_SRC
+
+Web サーバの設定ファイルを編集する時のため。 apache-mode は fluentd の設定ファイルを編集する時にも使える。
+
+#+BEGIN_SRC emacs-lisp
+  (use-package nginx-mode :ensure t)
+  (use-package apache-mode :ensure t)
+#+END_SRC
+
+scala-mode なんているのかよ？と思っていたけれど、 build.scala を Emacs で編集したい時があった。
+
+#+BEGIN_SRC emacs-lisp
+  (use-package scala-mode :ensure t)
 #+END_SRC
 
 ** org-babel
