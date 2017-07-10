@@ -93,8 +93,6 @@ Command キーをメタキーに、Optionキーを無効に変更する
 #+END_SRC
 
 ** ag
-使い方とかはここを見る。
-
 事前に homebrew で [[https://github.com/ggreer/the_silver_searcher][ag]] をインストールする必要がある。
 
 #+BEGIN_SRC sh
@@ -181,12 +179,15 @@ C-c m で magit-status を実行する。
 
 ** 細々とした言語別のモード設定
 
-設定ファイルを記述するために。
+*** 設定ファイルの編集用
+yaml や json を編集流ためのモード。
 
 #+BEGIN_SRC emacs-lisp
   (use-package yaml-mode :ensure t)
   (use-package json-mode :ensure t)
 #+END_SRC
+
+*** Terraform
 
 Terraform の設定を書く時は、基本的には IntelliJ を使った方が良い。けど、一応入れておく。
 
@@ -194,18 +195,25 @@ Terraform の設定を書く時は、基本的には IntelliJ を使った方が
   (use-package terraform-mode :ensure t)
 #+END_SRC
 
-README.md を編集するために。
+*** Markdown
+
+README.md を編集するために入れておく。
 
 #+BEGIN_SRC emacs-lisp
   (use-package markdown-mode :ensure t)
 #+END_SRC
 
-Web サーバの設定ファイルを編集する時のため。 apache-mode は fluentd の設定ファイルを編集する時にも使える。
+*** Web サーバの設定ファイル編集用
+
+Web サーバの設定ファイルを編集する時のため。
+apache-mode は fluentd の設定ファイルを編集する時にも使える。
 
 #+BEGIN_SRC emacs-lisp
   (use-package nginx-mode :ensure t)
   (use-package apache-mode :ensure t)
 #+END_SRC
+
+*** scala-mode
 
 scala-mode なんているのかよ？と思っていたけれど、 build.scala を Emacs で編集したい時があった。
 
