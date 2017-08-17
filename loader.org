@@ -177,8 +177,19 @@ C-c m で magit-status を実行する。
 #+END_SRC
 
 ** markdown-toc
+
+マークダウンで書いたファイルに目次をつけるために。
+
 #+BEGIN_SRC emacs-lisp
 (use-package markdown-toc :ensure t)
+#+END_SRC
+
+** edit-indirect
+
+マークダウンの =```= の中のコードを org-babel 的に書きたいので。
+
+#+BEGIN_SRC emacs-lisp
+  (use-package edit-indirect :ensure t)
 #+END_SRC
 
 ** 細々とした言語別のモード設定
