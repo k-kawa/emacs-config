@@ -221,6 +221,14 @@ scala-mode なんているのかよ？と思っていたけれど、 build.scala
   (use-package scala-mode :ensure t)
 #+END_SRC
 
+*** ruby-mode
+
+ruby-mode でマジックコメントを挿入しない。
+
+#+BEGIN_SRC emacs-lisp
+  (setq ruby-insert-encoding-magic-comment nil)
+#+END_SRC
+
 ** org-babel
 *** org-babel で有効にする言語
 #+BEGIN_SRC emacs-lisp
