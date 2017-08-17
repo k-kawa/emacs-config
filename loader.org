@@ -247,12 +247,24 @@ ruby-mode でマジックコメントを挿入しない。
 ** org-babel
 *** org-babel で有効にする言語
 #+BEGIN_SRC emacs-lisp
-    (org-babel-do-load-languages
-     'org-babel-load-languages
-     '((python . t)
-       (sh . t)
-       (ruby . t)))
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((python . t)
+     (sh . t)
+     (ruby . t)
+     (plantuml . t)))
 #+END_SRC
+*** PlantUML の jar を指定する
+この jar は brew で入れたもの
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-plantuml-jar-path
+        "/usr/local/Cellar/plantuml/1.2017.14/libexec/plantuml.jar")
+#+END_SRC
+
+#+RESULTS:
+: /usr/local/Cellar/plantuml/1.2017.14/libexec/plantuml.jar
+
 ** org ファイルを ipynb にエクスポートする
 #+BEGIN_SRC emacs-lisp
   (use-package ox-ipynb :ensure t)
