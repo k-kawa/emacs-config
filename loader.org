@@ -71,21 +71,22 @@ https://support.apple.com/ja-jp/HT204436
 ** use-package をインストールする
 
 #+BEGIN_SRC emacs-lisp
-(require 'package)
-(setq package-enable-at-startup nil)
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
-(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
-(add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
-(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
-(package-initialize)
+  (require 'package)
+  (setq package-enable-at-startup nil)
+  (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+  (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
+  (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
+  (package-initialize)
 
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
+  (unless (package-installed-p 'use-package)
+    (package-refresh-contents)
+    (package-install 'use-package))
 
-(require 'diminish)
-(require 'bind-key)
+  (require 'diminish)
+  (require 'bind-key)
 #+END_SRC
+
 ** exec-path-from-shell-initialize
 
 シェルの $PATH 環境変数を引き継ぐ。
