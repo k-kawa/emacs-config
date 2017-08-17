@@ -270,6 +270,12 @@ ruby-mode でマジックコメントを挿入しない。
   (use-package ox-ipynb :ensure t)
 #+END_SRC
 
+** neotree
+#+BEGIN_SRC emacs-lisp
+  (use-package all-the-icons :ensure t)
+  (use-package neotree :ensure t)
+#+END_SRC
+
 * Look and feel
 ** カラーテーマ
 base16 のテーマを設定する。
