@@ -32,6 +32,11 @@
   (global-set-key (kbd "M-<down>")  'windmove-down)
 #+END_SRC
 
+** yes/no の代わりに y/n で答えられるようにする
+#+BEGIN_SRC emacs-lisp
+(fset 'yes-or-no-p 'y-or-n-p)
+#+END_SRC
+
 ** Mac 固有の設定
 *** Command とスペースで入力切替が起こる設定を無効にする
 
@@ -51,11 +56,6 @@ Command キーをメタキーに、Optionキーを無効に変更する
   (setq ns-function-modifier 'hyper)
 #+end_src
 
-*** yes/no の代わりに y/n で答えられるようにする
-#+BEGIN_SRC emacs-lisp
-(fset 'yes-or-no-p 'y-or-n-p)
-#+END_SRC
-
 *** backslash を正しく入力できるようにする
 デフォルトでは \ (バックスラッシュ)を入力すると ¥ (円マーク)が入力されてしまう。
 これを正しく入力できるようにするには、下記の手順を行う。
@@ -63,6 +63,9 @@ Command キーをメタキーに、Optionキーを無効に変更する
 1. 画面右上の 「A」というアイコンをクリックする
 2. 「環境設定」を開く
 3. 「入力ソース」のタブの中に「 ¥ で入力する文字」という設定項目があるので、これを「\(バックスラッシュ)」に変更する
+
+*** function キーの設定を入れ替える
+https://support.apple.com/ja-jp/HT204436
 
 * パッケージごとの設定
 ** use-package をインストールする
